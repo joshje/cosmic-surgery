@@ -12,7 +12,10 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     navigator.webkitGetUserMedia ||
     navigator.mozGetUserMedia ||
     navigator.msGetUserMedia
-  ).bind(navigator);
+  );
+  if (getUserMedia) {
+    getUserMedia = getUserMedia.bind(navigator);
+  }
 }
 
 module.exports.getUserMedia = getUserMedia;

@@ -18,7 +18,7 @@ button.addEventListener('click', function () {
 }, false);
 
 if (! mediaDevices.getUserMedia) {
-  window.alert('Your browser is not supported (we need to display a message)');
+  window.alert('Try using Chrome or Firefox. Your browser is not supported (we need to display a message)');
   // handle fallback
 } else {
   mediaDevices.getUserMedia({
