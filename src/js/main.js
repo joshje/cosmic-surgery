@@ -1,20 +1,31 @@
 var mediaDevices = require('./media-devices');
-var canvas = require('./canvas');
+var renderer = require('./renderer');
 
 var video = document.getElementById('video');
 
-video.addEventListener('play', canvas.draw.bind(canvas), false);
-window.addEventListener('resize', canvas.draw.bind(canvas), false);
+if (window.location.search.indexOf('debug') !== -1) {
+  window.debug = true;
+}
+
+video.addEventListener('play', renderer.draw, false);
+window.addEventListener('resize', renderer.draw, false);
+
+var button = document.getElementById('btn-download');
+button.addEventListener('click', function () {
+  var image = renderer.getImage();
+  button.href = image;
+  return false;
+}, false);
 
 if (! mediaDevices.getUserMedia) {
-  console.log('getUserMedia not supported');
+  window.alert('Your browser is not supported (we need to display a message)');
   // handle fallback
 } else {
   mediaDevices.getUserMedia({
     video: {
       mandatory: {
-        minWidth: 1280,
-        minHeight: 720
+        minWidth: 640,
+        minHeight: 480
       }
     }
   }, function success(stream) {
