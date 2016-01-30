@@ -1,6 +1,5 @@
 var origamiTypes = require('./oragami-types');
 
-var video = document.getElementById('video');
 var cw, ch;
 
 var currentType = 'icosahedron';
@@ -10,7 +9,7 @@ scratchCanvas.width = 640;
 scratchCanvas.height = 480;
 var scratchCtx = scratchCanvas.getContext('2d');
 
-var drawImage = function(ctx, image, path) {
+var drawImage = function(sourceEl, ctx, image, path) {
   scratchCtx.save();
 
   scratchCtx.clearRect(0, 0, scratchCanvas.width, scratchCanvas.height);
@@ -33,7 +32,7 @@ var drawImage = function(ctx, image, path) {
     scratchCtx.globalAlpha = 0.5;
   }
 
-  scratchCtx.drawImage(video, sx, sy, sw, sh, dw * -0.5, dh * -0.5, dw, dh);
+  scratchCtx.drawImage(sourceEl, sx, sy, sw, sh, dw * -0.5, dh * -0.5, dw, dh);
 
   scratchCtx.restore();
   scratchCtx.save();
@@ -63,7 +62,7 @@ var drawImage = function(ctx, image, path) {
   scratchCtx.restore();
 };
 
-var drawFrame = function(ctx, width, height) {
+var renderFrame = function(sourceEl, ctx, width, height) {
   cw = width;
   ch = height;
   var type = origamiTypes[currentType];
@@ -77,10 +76,10 @@ var drawFrame = function(ctx, width, height) {
 
   for (var i = 0; i < type.paths.length; i++) {
     var path = type.paths[i];
-    drawImage(ctx, type.images[path.image], path);
+    drawImage(sourceEl, ctx, type.images[path.image], path);
   }
 };
 
 module.exports = {
-  drawFrame: drawFrame
+  renderFrame: renderFrame
 };

@@ -1,5 +1,13 @@
-<a href="#" id="btn-download" download="oragami.png">Download</a>
-<video id="video" autoplay></video>
+<a href="#" class="btn btn-download" download="oragami.png">Download</a>
+<video class="video-src" autoplay></video>
+<img class="img-src"/>
+<div id="source-select" class="source-select">
+  <a class="btn select-usermedia">Use webcam</a>
+  <span class="file-select">
+    <label class="btn" for="file">Choose a photo</label>
+    <input id="file" type="file" class="select-image" accept="image/*;capture=camera">
+  </span>
+</div>
 <div class="canvas-wrap">
   <canvas id="canvas-before"></canvas>
   <canvas id="canvas-after"></canvas>

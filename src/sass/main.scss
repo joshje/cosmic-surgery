@@ -20,12 +20,14 @@ canvas {
   }
 }
 
-video {
+.video-src,
+.img-src {
   display: none;
 }
 
 .canvas-wrap {
   display: block;
+  position: relative;
   overflow: hidden;
   margin: 10px auto;
   padding: 10px;
@@ -41,12 +43,54 @@ video {
   }
 }
 
-#btn-download {
+.btn-download {
   position: absolute;
   bottom: 1em;
   right: 1em;
-  padding: 0.5em;
-  background: #FFF;
-  text-decoration: none;
   color: #333;
+}
+
+.source-select {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 300px;
+  margin-left: -150px;
+  background: #fff;
+  z-index: 10;
+  text-align: center;
+
+  .show-canvas & {
+    display: none;
+  }
+
+  .file-select {
+    input {
+      display: none;
+    }
+  }
+
+  .select-usermedia {
+    opacity: 0.5;
+    cursor: default;
+
+    .supports-usermedia & {
+      opacity: 1;
+      cursor: pointer;
+    }
+  }
+}
+
+.btn {
+  display: inline-block;
+  font-size: 14px;
+  color: #FFF;
+  background: #3899C9;
+  padding: 10px;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    background: #52A1CE;
+  }
 }
