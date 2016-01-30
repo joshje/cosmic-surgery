@@ -29,4 +29,5 @@ gulp.task('watch', ['default'], function () {
 });
 
 
-gulp.task('default', ['sass', 'js']);
+gulp.task('build', ['sass', 'js']);
+gulp.task('default', ['build']);
