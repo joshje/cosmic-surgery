@@ -1,4 +1,5 @@
 var cosmic = require('./cosmic');
+var stateManager = require('./state-manager');
 
 if (window.location.search.indexOf('debug') !== -1) {
   window.debug = true;
@@ -9,6 +10,6 @@ if ('FormData' in window) {
 } else {
   // IE 9 and below don't support file uploads via AJAX
   // handle no support
-  window.alert('Your browser is not supported (we need to display a message)');
-  document.querySelector('.source-select').html = 'Sorry, your browser is not supported. Try Chrome or Firefox instead.';
+  document.getElementById('not-supported').innerHTML = '<p>Sorry, your browser is not supported. Try Chrome or Firefox instead.</p>';
+  stateManager.addState('not-supported');
 }

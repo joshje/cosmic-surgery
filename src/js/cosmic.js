@@ -12,11 +12,13 @@ var init = function() {
 
   video.addEventListener('play', function() {
     stateManager.removeState('loading');
+    stateManager.addState('can-share');
     renderer.renderFromVideo(video);
   }, false);
   img.crossOrigin = 'Anonymous';
   img.addEventListener('load', function() {
     stateManager.removeState('loading');
+    stateManager.addState('can-share');
     renderer.renderFromImage(img);
   }, false);
   window.addEventListener('resize', renderer.render, false);
@@ -36,6 +38,8 @@ var init = function() {
   selectUserMedia.addEventListener('click', function() {
     if (! mediaDevices.getUserMedia) return;
     stateManager.addState('loading');
+    stateManager.addState('show-canvas');
+    stateManager.removeState('can-share');
 
     mediaDevices.getUserMedia({
       video: {
@@ -58,6 +62,8 @@ var init = function() {
   var selectImage = document.querySelector('.select-image');
   selectImage.addEventListener('change', function(evt) {
     stateManager.addState('loading');
+    stateManager.addState('show-canvas');
+    stateManager.removeState('can-share');
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/upload', true);

@@ -1,3 +1,20 @@
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  > .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
 html,
 body {
   width: 100%;
@@ -8,40 +25,46 @@ body {
   color: #333;
 }
 
+.not-supported-message {
+  text-align: center;
+}
+
 .video-src,
 .img-src {
   display: none;
 }
 
-.canvas-wrap {
-  display: block;
+.canvas-area {
+  display: none;
   position: relative;
   overflow: hidden;
   margin: 10px 0;
-  padding: 8px;
+  padding: 9px;
   border: 1px solid grey;
 
-  .canvas-before,
-  .canvas-after {
-    float: left;
-    width: 320px;
-    height: 240px;
-  }
-  .canvas-before {
-    display: none;
+  canvas {
+    width: 100%;
+    height: 100%;
   }
 
-  @media all and (min-width: 680px) {
-    .canvas-before {
-      display: block;
+  .canvas-item {
+    @include aspect-ratio(640, 480);
+    width: 100%;
+
+    &-before {
+      display: none;
     }
   }
 
-  @media all and (min-width:1320px) {
-    .canvas-before,
-    .canvas-after {
-      width: 640px;
-      height: 480px;
+
+  @media all and (min-width: 680px) {
+    .canvas-item {
+      width: 50%;
+      float: left;
+
+      &-before {
+        display: block;
+      }
     }
   }
 
@@ -57,32 +80,45 @@ body {
     background: url(/images/loading.svg);
     z-index: 10;
   }
+
+  .show-canvas & {
+    display: block;
+  }
 }
 
 .wrap {
-  width: 340px;
+  width: 90%;
+  max-width: 1300px;
   margin: 0 auto;
 
   @media all and (min-width: 680px) {
-    width: 660px;
-  }
-
-  @media all and (min-width: 1320px) {
-    width: 1300px;
+    width: 95%;
+    min-width: 660px;
   }
 }
 
-.btn-download {
-  position: absolute;
-  bottom: 1em;
-  right: 1em;
-  color: #333;
+.share-area {
+  display: none;
+  text-align: center;
+
+  .can-share & {
+    display: block;
+  }
 }
 
 .source-select {
+  margin: 60px 0;
   text-align: center;
 
   .show-canvas & {
+    margin: 20px 0 0;
+
+    .introduction {
+      display: none;
+    }
+  }
+
+  .not-supported & {
     display: none;
   }
 

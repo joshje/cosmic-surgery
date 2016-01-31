@@ -3,22 +3,35 @@
 
 <div class="wrap">
 
-<div class="source-select">
-  <a class="btn select-usermedia">Use webcam</a>
-  <span class="file-select">
-    <label class="btn" for="file">Choose a photo</label>
-    <input id="file" type="file" class="select-image" accept="image/*">
-  </span>
+  <noscript><p class="not-supported-message">This site requires JavaScript in order to work.</p></noscript>
+  <div id="not-supported" class="not-supported-message"></div>
+
+  <div class="source-select">
+    <p class="introduction">To create your own cosmic surgery, choose a photo of yourself via your webcam or a photo.</p>
+    <a class="btn select-usermedia">Use webcam</a>
+    <span class="file-select">
+      <label class="btn" for="file">Choose a photo</label>
+      <input id="file" type="file" class="select-image" accept="image/*">
+    </span>
+  </div>
+
+  <div class="canvas-area">
+    <div class="canvas-item canvas-item-before">
+      <div class="content">
+        <canvas class="canvas-before"></canvas>
+      </div>
+    </div>
+    <div class="canvas-item">
+      <div class="content">
+        <canvas class="canvas-after"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="share-area">
+    <a href="#" class="btn btn-download" download="cosmicsurgery.png">Download</a>
+  </div>
+
 </div>
 
-<div class="canvas-wrap">
-  <canvas class="canvas-before"></canvas>
-  <canvas class="canvas-after"></canvas>
-</div>
-
-<a href="#" class="btn btn-download" download="oragami.png">Download</a>
-
-</div>
-
-<noscript>This site requires JavaScript in order to work.</noscript>
 <script src="/js/main.js"></script>
