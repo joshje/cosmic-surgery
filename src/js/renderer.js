@@ -1,7 +1,8 @@
 var origamiRenderer = require('./origami-renderer');
 var canvasBefore = document.getElementById('canvas-before');
 var canvasAfter = document.getElementById('canvas-after');
-var cw, ch;
+var cw = 640;
+var ch = 480;
 var ctxBefore, ctxAfter;
 var sourceType, sourceEl;
 
@@ -12,17 +13,22 @@ var getContext = function(canvas) {
   canvas.height = ch;
   var ctx = canvas.getContext('2d');
 
+  return ctx;
+};
+
+var drawImage = function(ctx) {
+  ctx.save();
   if (sourceType == 'video') {
     ctx.translate(cw, 0);
     ctx.scale(-1, 1);
   }
-  ctx.imageSmoothingEnabled = true;
 
-  return ctx;
+  ctx.drawImage(sourceEl, 0, 0, cw, ch);
+  ctx.restore();
 };
 
 var renderFrame = function() {
-  ctxBefore.drawImage(sourceEl, 0, 0, cw, ch);
+  drawImage(ctxBefore);
 
   if (sourceType == 'video') {
     ctxBefore.beginPath();
@@ -30,7 +36,8 @@ var renderFrame = function() {
     ctxBefore.stroke();
   }
 
-  ctxAfter.drawImage(sourceEl, 0, 0, cw, ch);
+  drawImage(ctxAfter);
+
   origamiRenderer.renderFrame(sourceEl, ctxAfter, cw, ch);
 
   if (sourceType == 'video') {
@@ -42,9 +49,6 @@ var render = function() {
   clearTimeout(frameTimer);
 
   if (! sourceEl) return;
-
-  cw = canvasAfter.clientWidth;
-  ch = canvasAfter.clientHeight;
 
   ctxBefore = getContext(canvasBefore);
   ctxAfter = getContext(canvasAfter);

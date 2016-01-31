@@ -2,12 +2,17 @@ var mediaDevices = require('./media-devices');
 var renderer = require('./renderer');
 
 var init = function() {
+  window.console = window.console || {
+    log: function() {}
+  };
+
   var video = document.querySelector('.video-src');
   var img = document.querySelector('.img-src');
 
   video.addEventListener('play', function() {
     renderer.renderFromVideo(video);
   }, false);
+  img.crossOrigin = 'Anonymous';
   img.addEventListener('load', function() {
     renderer.renderFromImage(img);
   }, false);
@@ -49,8 +54,25 @@ var init = function() {
 
   var selectImage = document.querySelector('.select-image');
   selectImage.addEventListener('change', function(evt) {
-    document.body.className += ' show-canvas';
-    img.src = URL.createObjectURL(evt.target.files[0]);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/upload', true);
+
+    xhr.onload = function() {
+      if (xhr.status >= 200 && xhr.status < 400) {
+        var data = JSON.parse(xhr.responseText);
+        img.src = data.url;
+        document.body.className += ' show-canvas';
+      } else {
+        window.alert('Are you sure that was an image?');
+        console.log(xhr.responseText || 'failed to upload image');
+      }
+    };
+
+    var formData = new FormData();
+    formData.append('image', evt.target.files[0]);
+
+    xhr.send(formData);
+
   }, false);
 };
 
