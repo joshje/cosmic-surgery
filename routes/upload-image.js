@@ -11,7 +11,8 @@ var s3 = new AWS.S3();
 
 module.exports = function(req, res) {
   var uploadToS3 = function(stream) {
-    var key = 'images/' + uuid.v4() + '.png';
+    var id = uuid.v4();
+    var key = 'images/' + id + '.png';
 
     s3.putObject({
       Bucket: 'cosmicsurgery',
@@ -27,6 +28,7 @@ module.exports = function(req, res) {
         });
       } else {
         res.json({
+          id: id,
           url: 'https://d2csffd0gyvkmk.cloudfront.net/' + key
         });
       }

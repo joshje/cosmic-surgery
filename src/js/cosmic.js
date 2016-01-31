@@ -23,13 +23,6 @@ var init = function() {
   }, false);
   window.addEventListener('resize', renderer.render, false);
 
-  var downloadButton = document.querySelector('.btn-download');
-  downloadButton.addEventListener('click', function () {
-    var image = renderer.getImage();
-    downloadButton.href = image;
-    return false;
-  }, false);
-
   if (mediaDevices.getUserMedia) {
     stateManager.addState('supports-usermedia');
   }

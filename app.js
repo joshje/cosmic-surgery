@@ -29,9 +29,7 @@ app.use(function(req, res, next) {
 
 app.use(express.static(__dirname + '/dist'));
 
-app.get('/', function(request, response) {
-  response.render('cosmic-surgery');
-});
+app.get('/', require('./routes/cosmicsurgery'));
 
 app.post('/upload', imageUpload.single('image'), require('./routes/upload-image'));
 

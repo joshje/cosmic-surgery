@@ -1,4 +1,6 @@
+var canvasToBlob = require('blueimp-canvastoblob');
 var origamiRenderer = require('./origami-renderer');
+var stateManager = require('./state-manager');
 var canvasBefore = document.querySelector('.canvas-before');
 var canvasAfter = document.querySelector('.canvas-after');
 var cw = 640;
@@ -70,11 +72,44 @@ var renderFromImage = function(el) {
   render();
 };
 
+var getImage = function() {
+  clearTimeout(frameTimer);
+  return canvasAfter.toDataURL.call(canvasAfter, 'image/png');
+};
+
+var getImageUrl = function(cb) {
+  console.log('getImageUrl');
+  stateManager.addState('loading');
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', '/upload', true);
+
+  xhr.onload = function() {
+    console.log('onload', xhr.status, xhr.responseText);
+    if (xhr.status >= 200 && xhr.status < 400) {
+      stateManager.removeState('loading');
+      var data = JSON.parse(xhr.responseText);
+      cb(data);
+    } else {
+      stateManager.removeState('loading');
+      window.alert('Something went wrong. Sorry!');
+      console.log(xhr.responseText || 'failed to upload image');
+    }
+  };
+
+  var image = getImage();
+  var formData = new FormData();
+  var imageBlob = canvasToBlob(image);
+  formData.append('image', imageBlob);
+
+  xhr.send(formData);
+
+};
+
 module.exports = {
   render: render,
   renderFromVideo: renderFromVideo,
   renderFromImage: renderFromImage,
-  getImage: function() {
-    return canvasAfter.toDataURL.call(canvasAfter, 'image/png');
-  }
+  getImage: getImage,
+  getImageUrl: getImageUrl
 };

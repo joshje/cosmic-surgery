@@ -1,5 +1,6 @@
 var cosmic = require('./cosmic');
 var stateManager = require('./state-manager');
+var sharing = require('./sharing');
 
 if (window.location.search.indexOf('debug') !== -1) {
   window.debug = true;
@@ -7,6 +8,7 @@ if (window.location.search.indexOf('debug') !== -1) {
 
 if ('FormData' in window) {
   cosmic.init();
+  sharing.init();
 } else {
   // IE 9 and below don't support file uploads via AJAX
   // handle no support
