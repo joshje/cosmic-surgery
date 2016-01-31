@@ -3,6 +3,7 @@ var plumber = require('gulp-plumber');
 var notify = require("gulp-notify");
 var webpack = require('webpack-stream');
 var sass = require('gulp-sass');
+var imagemin = require('gulp-imagemin');
 
 gulp.task('sass', function () {
   gulp.src('src/sass/**/*.scss')
@@ -23,11 +24,20 @@ gulp.task('js', function() {
   .pipe(gulp.dest('dist/js'));
 });
 
+gulp.task('images', function() {
+  return gulp.src('src/images/*')
+  .pipe(imagemin({
+    svgoPlugins: [{removeViewBox: false}]
+  }))
+  .pipe(gulp.dest('dist/images'));
+});
+
 gulp.task('watch', ['default'], function () {
   gulp.watch('src/**/*.scss', ['sass']);
   gulp.watch('src/**/*.js', ['js']);
+  gulp.watch('src/images/*', ['images']);
 });
 
 
-gulp.task('build', ['sass', 'js']);
+gulp.task('build', ['sass', 'js', 'images']);
 gulp.task('default', ['build']);

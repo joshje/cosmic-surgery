@@ -1,6 +1,6 @@
 var origamiRenderer = require('./origami-renderer');
-var canvasBefore = document.getElementById('canvas-before');
-var canvasAfter = document.getElementById('canvas-after');
+var canvasBefore = document.querySelector('.canvas-before');
+var canvasAfter = document.querySelector('.canvas-after');
 var cw = 640;
 var ch = 480;
 var ctxBefore, ctxAfter;

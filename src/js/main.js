@@ -10,5 +10,5 @@ if ('FormData' in window) {
   // IE 9 and below don't support file uploads via AJAX
   // handle no support
   window.alert('Your browser is not supported (we need to display a message)');
-  document.getElementById('source-select').html = 'Sorry, your browser is not supported. Try Chrome or Firefox instead.';
+  document.querySelector('.source-select').html = 'Sorry, your browser is not supported. Try Chrome or Firefox instead.';
 }

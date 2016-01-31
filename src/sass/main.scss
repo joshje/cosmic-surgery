@@ -8,18 +8,6 @@ body {
   color: #333;
 }
 
-canvas {
-  display: block;
-  float: left;
-  width: 320px;
-  height: 240px;
-
-  @media all and (min-width:1300px) {
-    width: 640px;
-    height: 480px;
-  }
-}
-
 .video-src,
 .img-src {
   display: none;
@@ -29,17 +17,58 @@ canvas {
   display: block;
   position: relative;
   overflow: hidden;
-  margin: 10px auto;
-  padding: 10px;
+  margin: 10px 0;
+  padding: 8px;
   border: 1px solid grey;
-  width: 320px;
 
-  @media all and (min-width: 700px) {
-    width: 640px;
+  .canvas-before,
+  .canvas-after {
+    float: left;
+    width: 320px;
+    height: 240px;
+  }
+  .canvas-before {
+    display: none;
   }
 
-  @media all and (min-width: 1300px) {
-    width: 1280px;
+  @media all and (min-width: 680px) {
+    .canvas-before {
+      display: block;
+    }
+  }
+
+  @media all and (min-width:1320px) {
+    .canvas-before,
+    .canvas-after {
+      width: 640px;
+      height: 480px;
+    }
+  }
+
+  .loading &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    margin-left: -50px;
+    margin-top: -50px;
+    background: url(/images/loading.svg);
+    z-index: 10;
+  }
+}
+
+.wrap {
+  width: 340px;
+  margin: 0 auto;
+
+  @media all and (min-width: 680px) {
+    width: 660px;
+  }
+
+  @media all and (min-width: 1320px) {
+    width: 1300px;
   }
 }
 
@@ -51,13 +80,6 @@ canvas {
 }
 
 .source-select {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  width: 300px;
-  margin-left: -150px;
-  background: #fff;
-  z-index: 10;
   text-align: center;
 
   .show-canvas & {
