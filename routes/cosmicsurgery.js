@@ -1,10 +1,6 @@
 module.exports = function(req, res) {
   var meta = [
     {
-      property: 'og:url',
-      content: 'https://cosmicsurgery.co.uk/'
-    },
-    {
       property: 'og:title',
       content: 'Cosmic Surgery'
     },
