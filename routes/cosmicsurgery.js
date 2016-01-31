@@ -26,7 +26,7 @@ module.exports = function(req, res) {
     }
   ];
   if (req.query.share) {
-    var imageUrl = 'https://d2csffd0gyvkmk.cloudfront.net/images/' + req.query.share + '.png';
+    var imageUrl = 'http://d2csffd0gyvkmk.cloudfront.net/images/' + req.query.share + '.png';
     meta.push(
       {
         property: 'og:image',
