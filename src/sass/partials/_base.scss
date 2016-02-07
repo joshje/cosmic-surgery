@@ -1,0 +1,61 @@
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  > .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  color: #333;
+}
+
+.wrap {
+  width: 90%;
+  max-width: 1300px;
+  margin: 0 auto;
+
+  @media all and (min-width: 680px) {
+    width: 95%;
+    min-width: 660px;
+  }
+}
+
+.btn {
+  display: inline-block;
+  font-size: 14px;
+  color: #FFF;
+  background: #3899C9;
+  padding: 10px;
+  cursor: pointer;
+  text-decoration: none;
+
+  &:hover {
+    background: #52A1CE;
+  }
+}
+
+.not-supported-message {
+  text-align: center;
+}
+
+.video-src,
+.img-src {
+  display: none;
+}
+

@@ -1,0 +1,54 @@
+.select-area {
+  margin: 10px 0;
+  background: #F0F0F0;
+
+  &-title {
+    background: #DDD;
+    margin: 0;
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  &-options {
+    padding: 10px;
+    overflow: hidden;
+  }
+
+  &-option {
+    font-size: 12px;
+    display: block;
+    float: left;
+    margin: 0 10px 0 0;
+    padding: 10px;
+    border: 1px solid #333;
+    text-align: center;
+    cursor: pointer;
+
+    img {
+      display: block;
+      margin: 0 auto 10px;
+    }
+
+    &:hover {
+      background: #FFF;
+    }
+  }
+}
+
+.source-select {
+  .file-select {
+    input {
+      display: none;
+    }
+  }
+
+  .select-usermedia {
+    opacity: 0.5;
+    cursor: default;
+
+    .supports-usermedia & {
+      opacity: 1;
+      cursor: pointer;
+    }
+  }
+}

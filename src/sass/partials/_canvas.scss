@@ -1,0 +1,51 @@
+.canvas-area {
+  display: none;
+  position: relative;
+  overflow: hidden;
+  margin: 10px 0;
+  padding: 9px;
+  border: 1px solid grey;
+
+  canvas {
+    width: 100%;
+    height: 100%;
+  }
+
+  .canvas-item {
+    @include aspect-ratio(640, 480);
+    width: 100%;
+
+    &-before {
+      display: none;
+    }
+  }
+
+
+  @media all and (min-width: 680px) {
+    .canvas-item {
+      width: 50%;
+      float: left;
+
+      &-before {
+        display: block;
+      }
+    }
+  }
+
+  .loading &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 100px;
+    margin-left: -50px;
+    margin-top: -50px;
+    background: url(/images/loading.svg);
+    z-index: 10;
+  }
+
+  .show-canvas & {
+    display: block;
+  }
+}

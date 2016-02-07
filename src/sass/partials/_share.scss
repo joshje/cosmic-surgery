@@ -1,0 +1,24 @@
+.share-options {
+  display: none;
+
+  .show-share-options & {
+    display: block;
+  }
+}
+
+.kickstarter-message {
+  display: none;
+
+  .show-kickstarter-message & {
+    display: block;
+  }
+}
+
+.share-area {
+  display: none;
+  text-align: center;
+
+  .can-share & {
+    display: block;
+  }
+}
