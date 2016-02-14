@@ -19,6 +19,9 @@ app.set('environment', (process.env.NODE_ENV || 'development'));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+app.locals.pageTitle = 'Cosmic Surgery';
+app.locals.pageDescription = 'Give yourself a cosmic facelift';
+
 app.use(function(req, res, next) {
   if (app.get('environment') !== 'development' && req.headers['x-forwarded-proto'] !== 'https') {
     return res.redirect(['https://', req.get('Host'), req.url].join(''));

@@ -80,6 +80,11 @@ var renderFrame = function(sourceEl, ctx, width, height) {
   }
 };
 
+var changeType = function(type) {
+  currentType = type;
+};
+
 module.exports = {
-  renderFrame: renderFrame
+  renderFrame: renderFrame,
+  changeType: changeType
 };

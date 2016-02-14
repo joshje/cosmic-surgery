@@ -78,14 +78,12 @@ var getImage = function() {
 };
 
 var getImageUrl = function(cb) {
-  console.log('getImageUrl');
   stateManager.addState('loading');
 
   var xhr = new XMLHttpRequest();
   xhr.open('POST', '/upload', true);
 
   xhr.onload = function() {
-    console.log('onload', xhr.status, xhr.responseText);
     if (xhr.status >= 200 && xhr.status < 400) {
       stateManager.removeState('loading');
       var data = JSON.parse(xhr.responseText);
@@ -105,6 +103,19 @@ var getImageUrl = function(cb) {
   xhr.send(formData);
 
 };
+
+var changeProcedure = function() {
+  origamiRenderer.changeType(this.getAttribute('data-procedure'));
+
+  render();
+
+  return false;
+};
+
+var procedures = document.querySelectorAll('[data-procedure]');
+for (var i = procedures.length - 1; i >= 0; i--) {
+  procedures[i].addEventListener('click', changeProcedure.bind(procedures[i]), false);
+}
 
 module.exports = {
   render: render,

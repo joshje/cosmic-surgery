@@ -10,19 +10,24 @@
   }
 
   &-options {
+    margin: 0;
     padding: 10px;
     overflow: hidden;
+    list-style: none;
   }
 
   &-option {
     font-size: 12px;
     display: block;
+    width: 8em;
     float: left;
     margin: 0 10px 0 0;
     padding: 10px;
     border: 1px solid #333;
     text-align: center;
     cursor: pointer;
+    color: #000;
+    text-decoration: none;
 
     img {
       display: block;

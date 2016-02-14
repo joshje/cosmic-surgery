@@ -1,44 +1,22 @@
 module.exports = function(req, res) {
-  var meta = [
+  var procedures = [
     {
-      property: 'og:title',
-      content: 'Cosmic Surgery'
+      name: 'icosahedron',
+      label: 'Icosahedron'
     },
     {
-      property: 'og:description',
-      content: 'Give yourself a cosmic facelift'
-    },
-    {
-      property: 'twitter:card',
-      content: 'summary_large_image'
-    },
-    {
-      property: 'twitter:site',
-      content: '@cosmicsurgery'
-    },
-    {
-      property: 'twitter:title',
-      content: 'Cosmic Surgery'
-    },
-    {
-      property: 'twitter:description',
-      content: 'Give yourself a cosmic facelift'
+      name: 'test',
+      label: 'Test'
     }
   ];
+
+  var pageImage;
   if (req.query.share) {
-    var imageUrl = 'http://d2csffd0gyvkmk.cloudfront.net/images/' + req.query.share + '.png';
-    meta.push(
-      {
-        property: 'og:image',
-        content: imageUrl
-      },
-      {
-        property: 'twitter:image',
-        content: imageUrl
-      }
-    );
+    pageImage = 'http://d2csffd0gyvkmk.cloudfront.net/images/' + req.query.share + '.png';
   }
+
   res.render('cosmic-surgery', {
-    meta: meta
+    procedures: procedures,
+    pageImage: pageImage
   });
 };
