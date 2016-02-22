@@ -2,66 +2,8 @@
 <img class="img-src"/>
 
 <div class="wrap">
-
-  <noscript><p class="not-supported-message">This site requires JavaScript in order to work.</p></noscript>
-  <div id="not-supported" class="not-supported-message"></div>
-
-  <div class="select-area source-select">
-    <p class="select-area-title">Select a source</p>
-    <div class="select-area-options">
-    <a class="select-usermedia select-area-option"><img src="/images/placeholder.png" alt=""> Use webcam</a>
-    <span class="file-select">
-      <label class="select-area-option" for="file"><img src="/images/placeholder.png" alt=""> Choose a photo</label>
-      <input id="file" type="file" class="select-image" accept="image/*">
-    </span>
-    </div>
-  </div>
-
-  <div class="select-area procedure-select">
-    <p class="select-area-title">Choose your procedure</p>
-    <ul class="select-area-options procedures">
-    {{#each procedures}}
-      <li class="procedures-option">
-        <a class="select-area-option{{#active}} active{{/active}}" href="#" data-procedure="{{name}}">
-          <img src="/images/placeholder.png" alt=""> {{label}}
-        </a>
-      </li>
-    {{/each}}
-    </ul>
-  </div>
-
-  <div class="canvas-area">
-    <div class="canvas-item canvas-item-before">
-      <div class="content">
-        <canvas class="canvas-before"></canvas>
-      </div>
-    </div>
-    <div class="canvas-item">
-      <div class="content">
-        <canvas class="canvas-after"></canvas>
-      </div>
-    </div>
-  </div>
-
-  <div class="share-area">
-    <a href="#" class="btn btn-download" download="cosmicsurgery.png">Download</a>
-    <a href="#" class="btn btn-share">Share</a>
-  </div>
-
-</div>
-
-<div class="modal">
-  <div class="modal-inner">
-    <div class="kickstarter-message">
-      <p>Now you've had your cosmic surgery, you should get the book!</p>
-      <p><a target="_blank" class="btn" href="https://kickstarter.com/some-url">Back us on Kickstarter</a>
-    </div>
-    <div class="share-options">
-      <p>
-        <a href="#" class="btn btn-share-option" data-type="facebook">Share on Facebook</a>
-        <a href="#" class="btn btn-share-option" data-type="twitter">Share on Twitter</a>
-      </p>
-    </div>
+  <div id="stage">
+    {{> stageStart}}
   </div>
 </div>
 

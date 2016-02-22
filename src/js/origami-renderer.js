@@ -5,11 +5,15 @@ var cw, ch;
 var currentType = 'icosahedron';
 
 var scratchCanvas = document.createElement('canvas');
-scratchCanvas.width = 640;
-scratchCanvas.height = 480;
-var scratchCtx = scratchCanvas.getContext('2d');
+var scratchCtx;
 
-var drawImage = function(sourceEl, ctx, image, path) {
+var init = function(source) {
+  scratchCanvas.width = source.width;
+  scratchCanvas.height = source.height;
+  scratchCtx = scratchCanvas.getContext('2d');
+};
+
+var drawImage = function(source, ctx, image, path) {
   scratchCtx.save();
 
   scratchCtx.clearRect(0, 0, scratchCanvas.width, scratchCanvas.height);
@@ -32,7 +36,7 @@ var drawImage = function(sourceEl, ctx, image, path) {
     scratchCtx.globalAlpha = 0.5;
   }
 
-  scratchCtx.drawImage(sourceEl, sx, sy, sw, sh, dw * -0.5, dh * -0.5, dw, dh);
+  scratchCtx.drawImage(source.el, sx, sy, sw, sh, dw * -0.5, dh * -0.5, dw, dh);
 
   scratchCtx.restore();
   scratchCtx.save();
@@ -57,12 +61,12 @@ var drawImage = function(sourceEl, ctx, image, path) {
     scratchCtx.fill();
   }
 
-  ctx.drawImage(scratchCanvas, 0, 0, cw, ch);
+  ctx.drawImage(scratchCanvas, (scratchCanvas.width - cw) / 2, (scratchCanvas.height - ch) / 2, cw, ch, 0, 0, cw, ch);
 
   scratchCtx.restore();
 };
 
-var renderFrame = function(sourceEl, ctx, width, height) {
+var renderFrame = function(source, ctx, width, height) {
   cw = width;
   ch = height;
   var type = origamiTypes[currentType];
@@ -76,7 +80,7 @@ var renderFrame = function(sourceEl, ctx, width, height) {
 
   for (var i = 0; i < type.paths.length; i++) {
     var path = type.paths[i];
-    drawImage(sourceEl, ctx, type.images[path.image], path);
+    drawImage(source, ctx, type.images[path.image], path);
   }
 };
 
@@ -85,6 +89,7 @@ var changeType = function(type) {
 };
 
 module.exports = {
+  init: init,
   renderFrame: renderFrame,
   changeType: changeType
 };

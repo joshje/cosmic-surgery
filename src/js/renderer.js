@@ -1,14 +1,21 @@
+var gator = require('gator');
 var canvasToBlob = require('blueimp-canvastoblob');
 var origamiRenderer = require('./origami-renderer');
 var stateManager = require('./state-manager');
-var canvasBefore = document.querySelector('.canvas-before');
-var canvasAfter = document.querySelector('.canvas-after');
-var cw = 640;
-var ch = 480;
+var cw = 720;
+var ch = 720;
 var ctxBefore, ctxAfter;
-var sourceType, sourceEl;
+var source = {};
+
+var canvasBefore;
+var canvasAfter;
 
 var frameTimer;
+
+var init = function() {
+  canvasBefore = document.querySelector('.canvas-before');
+  canvasAfter = document.querySelector('.canvas-after');
+};
 
 var getContext = function(canvas) {
   canvas.width = cw;
@@ -20,19 +27,19 @@ var getContext = function(canvas) {
 
 var drawImage = function(ctx) {
   ctx.save();
-  if (sourceType == 'video') {
+  if (source.type == 'video') {
     ctx.translate(cw, 0);
     ctx.scale(-1, 1);
   }
 
-  ctx.drawImage(sourceEl, 0, 0, cw, ch);
+  ctx.drawImage(source.el, (source.width - cw) / 2, (source.height - ch) / 2, cw, ch, 0, 0, cw, ch);
   ctx.restore();
 };
 
 var renderFrame = function() {
   drawImage(ctxBefore);
 
-  if (sourceType == 'video') {
+  if (source.type == 'video') {
     ctxBefore.beginPath();
     ctxBefore.ellipse(cw * 0.5, ch * 0.5, cw * 0.16, ch * 0.3, 0, 0, 2 * Math.PI);
     ctxBefore.stroke();
@@ -40,9 +47,9 @@ var renderFrame = function() {
 
   drawImage(ctxAfter);
 
-  origamiRenderer.renderFrame(sourceEl, ctxAfter, cw, ch);
+  origamiRenderer.renderFrame(source, ctxAfter, cw, ch);
 
-  if (sourceType == 'video') {
+  if (source.type == 'video') {
     frameTimer = setTimeout(renderFrame, 5);
   }
 };
@@ -50,7 +57,7 @@ var renderFrame = function() {
 var render = function() {
   clearTimeout(frameTimer);
 
-  if (! sourceEl) return;
+  if (! source.el) return;
 
   ctxBefore = getContext(canvasBefore);
   ctxAfter = getContext(canvasAfter);
@@ -59,15 +66,21 @@ var render = function() {
 };
 
 var renderFromVideo = function(el) {
-  sourceEl = el;
-  sourceType = 'video';
+  source.el = el;
+  source.type = 'video';
+  source.width = el.videoWidth;
+  source.height = el.videoHeight;
+  origamiRenderer.init(source);
 
   render();
 };
 
 var renderFromImage = function(el) {
-  sourceEl = el;
-  sourceType = 'image';
+  source.el = el;
+  source.type = 'image';
+  source.width = 720;
+  source.height = 720;
+  origamiRenderer.init(source);
 
   render();
 };
@@ -112,12 +125,10 @@ var changeProcedure = function() {
   return false;
 };
 
-var procedures = document.querySelectorAll('[data-procedure]');
-for (var i = procedures.length - 1; i >= 0; i--) {
-  procedures[i].addEventListener('click', changeProcedure.bind(procedures[i]), false);
-}
+gator(document).on('click', '[data-procedure]', changeProcedure);
 
 module.exports = {
+  init: init,
   render: render,
   renderFromVideo: renderFromVideo,
   renderFromImage: renderFromImage,

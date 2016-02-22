@@ -1,6 +1,8 @@
+var router = require('express').Router();
 var AWS = require('aws-sdk');
 var uuid = require('node-uuid');
 var gm = require('gm').subClass({ imageMagick: true });
+var counter = require('./helpers/counter');
 
 AWS.config.update({
   accessKeyId: process.env.AWS_ACCESS_KEY_COSMIC,
@@ -9,8 +11,10 @@ AWS.config.update({
 
 var s3 = new AWS.S3();
 
-module.exports = function(req, res) {
+router.get('/', function(req, res) {
   var uploadToS3 = function(stream) {
+    counter.increment(req);
+
     var id = uuid.v4();
     var key = 'images/' + id + '.png';
 
@@ -51,4 +55,6 @@ module.exports = function(req, res) {
       uploadToS3(buffer);
     }
   });
-};
+});
+
+module.exports = router;

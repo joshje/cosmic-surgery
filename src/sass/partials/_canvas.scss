@@ -1,10 +1,7 @@
 .canvas-area {
-  display: none;
   position: relative;
   overflow: hidden;
   margin: 10px 0;
-  padding: 9px;
-  border: 1px solid grey;
 
   canvas {
     width: 100%;
@@ -12,8 +9,12 @@
   }
 
   .canvas-item {
-    @include aspect-ratio(640, 480);
     width: 100%;
+
+    &-inner {
+      margin: 20px;
+      @include aspect-ratio(1, 1);
+    }
 
     &-before {
       display: none;
@@ -25,6 +26,13 @@
     .canvas-item {
       width: 50%;
       float: left;
+
+      &:first-child .canvas-item-inner {
+        margin-right: 10px;
+      }
+      &:last-child .canvas-item-inner {
+        margin-left: 10px;
+      }
 
       &-before {
         display: block;
@@ -43,9 +51,5 @@
     margin-top: -50px;
     background: url(/images/loading.svg);
     z-index: 10;
-  }
-
-  .show-canvas & {
-    display: block;
   }
 }

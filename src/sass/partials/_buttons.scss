@@ -1,0 +1,31 @@
+.btn {
+  display: inline-block;
+  font-size: 14px;
+  color: $color-main-dark;
+  background: $color-main-light;
+  padding: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+
+  &:hover {
+    background: darken($color-main-light, 5%);
+    color: darken($color-main-dark, 5%);
+  }
+}
+
+.file-select {
+  input {
+    display: none;
+  }
+}
+
+.select-usermedia {
+  opacity: 0.5;
+  cursor: default;
+
+  .supports-usermedia & {
+    opacity: 1;
+    cursor: pointer;
+  }
+}

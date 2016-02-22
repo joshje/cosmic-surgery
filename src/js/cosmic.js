@@ -1,3 +1,4 @@
+var gator = require('gator');
 var mediaDevices = require('./media-devices');
 var renderer = require('./renderer');
 var stateManager = require('./state-manager');
@@ -10,35 +11,37 @@ var init = function() {
   var video = document.querySelector('.video-src');
   var img = document.querySelector('.img-src');
 
-  video.addEventListener('play', function() {
+  gator(video).on('play', function() {
     stateManager.removeState('loading');
     stateManager.addState('can-share');
     renderer.renderFromVideo(video);
-  }, false);
+  });
+
   img.crossOrigin = 'Anonymous';
-  img.addEventListener('load', function() {
+  gator(img).on('load', function() {
     stateManager.removeState('loading');
     stateManager.addState('can-share');
     renderer.renderFromImage(img);
-  }, false);
-  window.addEventListener('resize', renderer.render, false);
+  });
+
+  gator(window).on('resize', renderer.render);
 
   if (mediaDevices.getUserMedia) {
     stateManager.addState('supports-usermedia');
   }
 
-  var selectUserMedia = document.querySelector('.select-usermedia');
-  selectUserMedia.addEventListener('click', function() {
+  gator(document).on('click', '.select-usermedia', function() {
     if (! mediaDevices.getUserMedia) return;
     stateManager.addState('loading');
-    stateManager.addState('show-canvas');
+    stateManager.setStage('surgery');
     stateManager.removeState('can-share');
+    renderer.init();
 
     mediaDevices.getUserMedia({
       video: {
         mandatory: {
-          minWidth: 640,
-          minHeight: 480
+          minWidth: 1280,
+          minHeight: 720
         }
       }
     }, function success(stream) {
@@ -50,13 +53,12 @@ var init = function() {
     });
 
     return false;
-  }, false);
+  });
 
-  var selectImage = document.querySelector('.select-image');
-  selectImage.addEventListener('change', function(evt) {
+  gator(document).on('change', '.select-image', function(evt) {
     stateManager.addState('loading');
-    stateManager.addState('show-canvas');
-    stateManager.removeState('can-share');
+    stateManager.setStage('surgery');
+    renderer.init();
 
     var xhr = new XMLHttpRequest();
     xhr.open('POST', '/upload', true);
@@ -76,8 +78,7 @@ var init = function() {
     formData.append('image', evt.target.files[0]);
 
     xhr.send(formData);
-
-  }, false);
+  });
 };
 
 module.exports = {

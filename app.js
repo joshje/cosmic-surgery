@@ -1,6 +1,7 @@
 var express = require('express');
 var exphbs  = require('express-handlebars');
 var multer = require('multer');
+
 var storage = multer.memoryStorage();
 var imageUpload = multer({
   storage: storage,
@@ -14,7 +15,7 @@ var imageUpload = multer({
 var app = express();
 
 app.set('port', (process.env.PORT || 3000));
-app.set('environment', (process.env.NODE_ENV || 'development'));
+app.set('trust proxy', true);
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
@@ -22,19 +23,15 @@ app.set('view engine', 'handlebars');
 app.locals.pageTitle = 'Cosmic Surgery';
 app.locals.pageDescription = 'Give yourself a cosmic facelift';
 
-app.use(function(req, res, next) {
-  if (app.get('environment') !== 'development' && req.headers['x-forwarded-proto'] !== 'https') {
-    return res.redirect(['https://', req.get('Host'), req.url].join(''));
-  }
-
-  return next();
-});
+app.use(require('./middleware/redirects'));
+app.use(require('./middleware/postgres'));
 
 app.use(express.static(__dirname + '/dist'));
 
-app.get('/', require('./routes/cosmicsurgery'));
+app.use('/', require('./routes/cosmicsurgery'));
+app.use('/counter', require('./routes/counter'));
 
-app.post('/upload', imageUpload.single('image'), require('./routes/upload-image'));
+app.use('/upload', imageUpload.single('image'), require('./routes/upload-image'));
 
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));

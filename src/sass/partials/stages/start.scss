@@ -1,0 +1,27 @@
+.start {
+  &-image {
+    img {
+      width: 100%;
+    }
+  }
+
+  &-options {
+    padding: 20px;
+    text-align: center;
+    text-transform: uppercase;
+
+    &-title {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .btn {
+      margin: 10px;
+
+      @media all and (min-width: 600px) {
+        width: 35%;
+        margin: 10px 5%;
+      }
+    }
+  }
+}

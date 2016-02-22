@@ -1,3 +1,4 @@
+var gator = require('gator');
 var stateManager = require('./state-manager');
 var renderer = require('./renderer');
 
@@ -17,7 +18,7 @@ var share = function() {
 };
 
 var shareOption = function(evt) {
-  stateManager.addState('show-kickstarter-message');
+  stateManager.setStage('complete');
   var type = evt.target.getAttribute('data-type');
 
   var shareLocation = shareLocations[type]
@@ -41,16 +42,9 @@ var download = function(evt) {
 };
 
 var init = function() {
-  var downloadButton = document.querySelector('.btn-download');
-  downloadButton.addEventListener('click', download, false);
-
-  var shareButton = document.querySelector('.btn-share');
-  shareButton.addEventListener('click', share, false);
-
-  var shareOptions = document.querySelectorAll('.btn-share-option');
-  for (var i = shareOptions.length - 1; i >= 0; i--) {
-    shareOptions[i].addEventListener('click', shareOption, false);
-  }
+  gator(document).on('click', '.btn-download', download);
+  gator(document).on('click', '.btn-share', share);
+  gator(document).on('click', '.btn-share-option', shareOption);
 };
 
 module.exports = {

@@ -18,7 +18,12 @@ gulp.task('js', function() {
   }))
   .pipe(webpack({
     output: {
-      filename: 'main.js',
+      filename: 'main.js'
+    },
+    module: {
+      loaders: [
+        { test: /\.handlebars$/, loader: 'handlebars-loader' }
+      ]
     }
   }))
   .pipe(gulp.dest('dist/js'));

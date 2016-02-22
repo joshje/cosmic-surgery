@@ -1,4 +1,6 @@
-module.exports = function(req, res) {
+var router = require('express').Router();
+
+router.get('/', function(req, res) {
   var procedures = [
     {
       name: 'icosahedron',
@@ -19,4 +21,6 @@ module.exports = function(req, res) {
     procedures: procedures,
     pageImage: pageImage
   });
-};
+});
+
+module.exports = router;
