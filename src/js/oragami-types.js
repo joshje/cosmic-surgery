@@ -25,7 +25,7 @@ module.exports = {
       }
     ]
   },
-  'test': {
+  'triangle': {
     images: [
       [270, 270, 100, 100],
       [220, 180, 100, 100]

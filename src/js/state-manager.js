@@ -9,10 +9,18 @@ var procedures = [
     active: true
   },
   {
-    name: 'test',
+    name: 'triangle',
     label: 'Procedure B'
   }
 ];
+
+var countStr = function() {
+  window.csConfig.count++;
+  var count = '00' + window.csConfig.count;
+  count = count.substr(count.length - 3);
+  return count;
+};
+
 
 var stageEl = document.getElementById('stage');
 
@@ -28,7 +36,7 @@ module.exports = {
   },
   showSurgery: function() {
     stageEl.innerHTML = surgeryTmpl({
-      count: window.csConfig.count,
+      count: countStr(),
       procedures: procedures
     });
   },

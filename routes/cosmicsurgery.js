@@ -11,7 +11,7 @@ router.get('/', function(req, res) {
   .catch(function() {
   })
   .then(function(result) {
-    var count = result && result.count + 1 || 'null';
+    var count = result && result.count || 0;
     res.render('cosmic-surgery', {
       pageImage: pageImage,
       count: count
