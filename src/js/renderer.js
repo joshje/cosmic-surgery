@@ -40,9 +40,14 @@ var renderFrame = function() {
   drawImage(ctxBefore);
 
   if (source.type == 'video') {
+    ctxBefore.save();
+    ctxBefore.strokeStyle = '#54BFAD';
+    ctxBefore.lineWidth = 5;
+    ctxBefore.setLineDash([20, 15]);
     ctxBefore.beginPath();
-    ctxBefore.ellipse(cw * 0.5, ch * 0.5, cw * 0.16, ch * 0.3, 0, 0, 2 * Math.PI);
+    ctxBefore.ellipse(cw * 0.5, ch * 0.5, cw * 0.25, ch * 0.35, 0, 0, 2 * Math.PI);
     ctxBefore.stroke();
+    ctxBefore.restore();
   }
 
   drawImage(ctxAfter);
