@@ -14,3 +14,21 @@
     bottom: 0;
   }
 }
+
+@mixin arrow($side) {
+  content: '';
+  width: 10px;
+  height: 32px;
+  background: url('/images/arrow.png');
+  background-size: 10px;
+  position: absolute;
+  bottom: -32px;
+
+  @if $side == 'left' {
+    left: -4px;
+  }
+
+  @if $side == 'right' {
+    right: -4px;
+  }
+}
