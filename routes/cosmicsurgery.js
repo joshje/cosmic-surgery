@@ -4,7 +4,7 @@ var counter = require('./helpers/counter');
 router.get('/', function(req, res) {
   var pageImage;
   if (req.query.share) {
-    pageImage = 'http://d2csffd0gyvkmk.cloudfront.net/images/' + req.query.share + '.png';
+    pageImage = 'http://d2csffd0gyvkmk.cloudfront.net/images/' + req.query.share + '.jpg';
   }
 
   counter.get(req)

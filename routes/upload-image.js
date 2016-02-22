@@ -33,20 +33,35 @@ router.post('/', function(req, res) {
           message: 'failed to upload image'
         });
       } else {
-        res.json({
-          id: id,
-          url: 'https://d2csffd0gyvkmk.cloudfront.net/' + key
+        s3.getSignedUrl('getObject', {
+          Bucket: 'cosmicsurgery',
+          Key: key,
+          ResponseContentDisposition: 'attachment; filename=cosmicsurgery.jpg',
+        }, function (err, url) {
+          if (err) {
+            console.log('failed to upload', err);
+            res.status(500).json({
+              error: true,
+              message: 'failed to upload image'
+            });
+          } else {
+            res.json({
+              id: id,
+              url: url
+            });
+          }
         });
+
       }
     });
   };
 
   gm(req.file.buffer, req.file.filename)
   .autoOrient()
-  .resize(1280, 720, '^')
+  .resize(720, 720, '^')
   .gravity('Center')
-  .extent(1280, 720)
-  .toBuffer('png', function (err, buffer) {
+  .extent(720, 720)
+  .toBuffer('jpg', function (err, buffer) {
     if (err) {
       console.log('imageMagick error', err);
       res.status(500).json({

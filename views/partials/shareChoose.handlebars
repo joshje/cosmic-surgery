@@ -1,0 +1,11 @@
+<div class="share-choose">
+  <div class="share-title">Do you like it?</div>
+  <div class="share-options">
+    {{#if isDownload}}
+    <a href="{{downloadUrl}}" class="btn">Download it!</a>
+    {{else}}
+    <a href="#" class="btn" data-choose="{{type}}">Share it!</a>
+    {{/if}}
+    <a href="#" class="btn" data-choose="retry">Take another</a>
+  </div>
+</div>

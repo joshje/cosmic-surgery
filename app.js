@@ -30,7 +30,6 @@ app.use(express.static(__dirname + '/dist'));
 
 app.use('/', require('./routes/cosmicsurgery'));
 app.use('/counter', require('./routes/counter'));
-
 app.use('/upload', imageUpload.single('image'), require('./routes/upload-image'));
 
 app.listen(app.get('port'), function() {
