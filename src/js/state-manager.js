@@ -14,6 +14,8 @@ module.exports = {
     document.body.className = document.body.className.replace(state, '');
   },
   setStage: function(stage) {
-    stageEl.innerHTML = stageMap[stage]();
+    stageEl.innerHTML = stageMap[stage]({
+      count: window.csConfig.count
+    });
   }
 };

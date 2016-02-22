@@ -6,7 +6,7 @@ var sass = require('gulp-sass');
 var imagemin = require('gulp-imagemin');
 
 gulp.task('sass', function () {
-  gulp.src('src/sass/**/*.scss')
+  gulp.src('src/sass/main.scss')
   .pipe(sass().on('error', notify.onError("Error: <%= error.message %>")))
   .pipe(gulp.dest('dist/css'));
 });
@@ -39,7 +39,7 @@ gulp.task('images', function() {
 
 gulp.task('watch', ['default'], function () {
   gulp.watch('src/**/*.scss', ['sass']);
-  gulp.watch('src/**/*.js', ['js']);
+  gulp.watch(['src/**/*.js', 'views/partials/**/*.handlebars'], ['js']);
   gulp.watch('src/images/*', ['images']);
 });
 

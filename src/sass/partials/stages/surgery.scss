@@ -1,0 +1,20 @@
+.surgery {
+  &-row {
+    padding: 15px 20px;
+    border-bottom: 10px solid $color-main-dark;
+    overflow: hidden;
+    position: relative;
+
+    &-title {
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    &-procedures {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+    }
+  }
+}

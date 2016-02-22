@@ -1,4 +1,5 @@
 var router = require('express').Router();
+var counter = require('./helpers/counter');
 
 router.get('/', function(req, res) {
   var procedures = [
@@ -17,10 +18,18 @@ router.get('/', function(req, res) {
     pageImage = 'http://d2csffd0gyvkmk.cloudfront.net/images/' + req.query.share + '.png';
   }
 
-  res.render('cosmic-surgery', {
-    procedures: procedures,
-    pageImage: pageImage
+  counter.get(req)
+  .catch(function() {
+  })
+  .then(function(result) {
+    var count = result && result.count + 1 || 'null';
+    res.render('cosmic-surgery', {
+      procedures: procedures,
+      pageImage: pageImage,
+      count: count
+    });
   });
+
 });
 
 module.exports = router;
