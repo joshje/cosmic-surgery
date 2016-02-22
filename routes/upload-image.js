@@ -11,7 +11,7 @@ AWS.config.update({
 
 var s3 = new AWS.S3();
 
-router.get('/', function(req, res) {
+router.post('/', function(req, res) {
   var uploadToS3 = function(stream) {
     counter.increment(req);
 
