@@ -99,7 +99,7 @@ var getImageUrl = function(cb) {
   stateManager.addState('loading');
 
   var xhr = new XMLHttpRequest();
-  xhr.open('POST', '/upload', true);
+  xhr.open('POST', '/upload?increment=true', true);
 
   xhr.onload = function() {
     if (xhr.status >= 200 && xhr.status < 400) {

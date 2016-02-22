@@ -13,7 +13,9 @@ var s3 = new AWS.S3();
 
 router.post('/', function(req, res) {
   var uploadToS3 = function(stream) {
-    counter.increment(req);
+    if (req.query.increment) {
+      counter.increment(req);
+    }
 
     var id = uuid.v4();
     var key = 'images/' + id + '.png';
