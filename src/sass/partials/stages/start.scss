@@ -1,7 +1,24 @@
 .start {
   &-image {
-    img {
-      width: 100%;
+    position: relative;
+    background: url('/images/background.jpg') 50% 50% no-repeat;
+    background-size: cover;
+    height: 400px;
+    text-align: center;
+
+    &-logo {
+      position: relative;
+      margin-top: 190px;
+      width: 90%;
+      max-width: 600px;
+    }
+
+    &-share {
+      width: 400px;
+      height: 400px;
+      position: absolute;
+      left: 50%;
+      margin-left: -200px;
     }
   }
 
