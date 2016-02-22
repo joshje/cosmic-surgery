@@ -10,11 +10,18 @@
       font-weight: bold;
       font-size: 14px;
     }
+  }
 
-    &-procedures {
-      position: absolute;
-      top: 15px;
-      right: 20px;
+  &-procedures {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    overflow: hidden;
+
+    &-option {
+      display: block;
+      float: left;
+      margin-left: 20px;
     }
   }
 }

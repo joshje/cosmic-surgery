@@ -123,7 +123,10 @@ var getImageUrl = function(cb) {
 };
 
 var changeProcedure = function() {
+  var activeEl = document.querySelector('[data-procedure].active');
+  activeEl.className = activeEl.className.replace(/active/g, '');
   origamiRenderer.changeType(this.getAttribute('data-procedure'));
+  this.className += ' active';
 
   render();
 

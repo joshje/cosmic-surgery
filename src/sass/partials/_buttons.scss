@@ -3,14 +3,18 @@
   font-size: 14px;
   color: $color-main-dark;
   background: $color-main-light;
-  padding: 10px;
+  padding: 7px;
   cursor: pointer;
   text-decoration: none;
   font-weight: bold;
+  border: 3px solid $color-main-light;
 
   &:hover {
-    background: darken($color-main-light, 5%);
-    color: darken($color-main-dark, 5%);
+    border-color: $color-main-dark;
+  }
+
+  &.active {
+    border-color: $color-main-dark;
   }
 }
 

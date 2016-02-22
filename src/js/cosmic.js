@@ -33,7 +33,7 @@ var init = function() {
   gator(document).on('click', '.select-usermedia', function() {
     if (! mediaDevices.getUserMedia) return;
     stateManager.addState('loading');
-    stateManager.setStage('surgery');
+    stateManager.showSurgery();
     stateManager.removeState('can-share');
     renderer.init();
 
@@ -57,7 +57,7 @@ var init = function() {
 
   gator(document).on('change', '.select-image', function(evt) {
     stateManager.addState('loading');
-    stateManager.setStage('surgery');
+    stateManager.showSurgery();
     renderer.init();
 
     var xhr = new XMLHttpRequest();
