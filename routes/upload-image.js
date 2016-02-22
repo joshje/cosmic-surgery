@@ -18,7 +18,7 @@ router.post('/', function(req, res) {
     }
 
     var id = uuid.v4();
-    var key = 'images/' + id + '.png';
+    var key = 'images/' + id + '.jpg';
 
     s3.putObject({
       Bucket: 'cosmicsurgery',
