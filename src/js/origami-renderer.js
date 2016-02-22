@@ -7,9 +7,9 @@ var currentType = 'icosahedron';
 var scratchCanvas = document.createElement('canvas');
 var scratchCtx;
 
-var init = function(source) {
-  scratchCanvas.width = source.width;
-  scratchCanvas.height = source.height;
+var init = function() {
+  scratchCanvas.width = 720;
+  scratchCanvas.height = 720;
   scratchCtx = scratchCanvas.getContext('2d');
 };
 
@@ -36,7 +36,7 @@ var drawImage = function(source, ctx, image, path) {
     scratchCtx.globalAlpha = 0.5;
   }
 
-  scratchCtx.drawImage(source.el, sx, sy, sw, sh, dw * -0.5, dh * -0.5, dw, dh);
+  scratchCtx.drawImage(source.el, (source.width - cw) / 2 + sx, (source.height - ch) / 2 + sy, sw, sh, dw * -0.5, dh * -0.5, dw, dh);
 
   scratchCtx.restore();
   scratchCtx.save();
@@ -61,7 +61,7 @@ var drawImage = function(source, ctx, image, path) {
     scratchCtx.fill();
   }
 
-  ctx.drawImage(scratchCanvas, (scratchCanvas.width - cw) / 2, (scratchCanvas.height - ch) / 2, cw, ch, 0, 0, cw, ch);
+  ctx.drawImage(scratchCanvas, 0, 0, cw, ch);
 
   scratchCtx.restore();
 };
@@ -74,7 +74,7 @@ var renderFrame = function(source, ctx, width, height) {
   if (window.debug) {
     for (var j = 0; j < type.images.length; j++) {
       var image = type.images[j];
-      ctx.strokeRect(640 - image[0] - image[2], image[1], image[2], image[3]);
+      ctx.strokeRect(720 - image[0] - image[2], image[1], image[2], image[3]);
     }
   }
 

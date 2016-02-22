@@ -41,9 +41,9 @@ router.get('/', function(req, res) {
 
   gm(req.file.buffer, req.file.filename)
   .autoOrient()
-  .resize(640, 480, '^')
+  .resize(1280, 720, '^')
   .gravity('Center')
-  .extent(640, 480)
+  .extent(1280, 720)
   .toBuffer('png', function (err, buffer) {
     if (err) {
       console.log('imageMagick error', err);
