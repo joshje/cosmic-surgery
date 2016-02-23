@@ -13,13 +13,13 @@ var init = function() {
   scratchCtx = scratchCanvas.getContext('2d');
 };
 
-var drawImage = function(source, ctx, image, path) {
+var drawImage = function(source, ctx, path, image, rotation) {
   scratchCtx.save();
 
   scratchCtx.clearRect(0, 0, scratchCanvas.width, scratchCanvas.height);
 
-  var pathXs = path.points.map(function(point) { return point[0]; });
-  var pathYs = path.points.map(function(point) { return point[1]; });
+  var pathXs = path.map(function(point) { return point[0]; });
+  var pathYs = path.map(function(point) { return point[1]; });
   var minX = Math.min.apply(Math, pathXs);
   var maxX = Math.max.apply(Math, pathXs);
   var minY = Math.min.apply(Math, pathYs);
@@ -38,8 +38,8 @@ var drawImage = function(source, ctx, image, path) {
 
   scratchCtx.translate(dtx, dty);
 
-  if (path.rotation) {
-    scratchCtx.rotate(path.rotation * Math.PI / 180);
+  if (rotation) {
+    scratchCtx.rotate(rotation * Math.PI / 180);
   }
   if (window.debug) {
     scratchCtx.globalAlpha = 0.5;
@@ -54,10 +54,10 @@ var drawImage = function(source, ctx, image, path) {
   scratchCtx.globalCompositeOperation = 'destination-in';
   scratchCtx.beginPath();
 
-  scratchCtx.moveTo(path.points[0][0], path.points[0][1]);
+  scratchCtx.moveTo(path[0][0], path[0][1]);
 
-  for (var i = 1; i < path.points.length; i++) {
-    scratchCtx.lineTo(path.points[i][0], path.points[i][1]);
+  for (var i = 1; i < path.length; i++) {
+    scratchCtx.lineTo(path[i][0], path[i][1]);
   }
 
   scratchCtx.closePath();
@@ -77,17 +77,20 @@ var renderFrame = function(source, ctx, width, height) {
   cw = width;
   ch = height;
   var type = origamiTypes[currentType];
+  var path, rotation, image;
 
   if (window.debug) {
     for (var j = 0; j < type.images.length; j++) {
-      var image = type.images[j];
+      image = type.images[j];
       ctx.strokeRect(720 - image[0] - 100, image[1] - 100, 200, 200);
     }
   }
 
   for (var i = 0; i < type.paths.length; i++) {
-    var path = type.paths[i];
-    drawImage(source, ctx, type.images[path.image], path);
+    path = type.paths[i];
+    rotation = [90, 340, 120][i%3];
+    image = type.images[i%type.images.length];
+    drawImage(source, ctx, path, image, rotation);
   }
 
   var shadowImg = document.querySelector('[data-shadow=' + currentType + ']');
