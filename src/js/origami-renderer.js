@@ -11,35 +11,53 @@ var init = function() {
   scratchCanvas.width = 720;
   scratchCanvas.height = 720;
   scratchCtx = scratchCanvas.getContext('2d');
+  enhanceTypes();
 };
 
-var drawImage = function(source, ctx, path, image, rotation) {
+var enhanceTypes = function() {
+  var enhancePaths = function(type, points, i) {
+    var rotation = [90, 340, 120][i%3];
+    var image = type.images[i%type.images.length];
+    var xPoints = points.map(function(point) { return point[0]; });
+    var yPoints = points.map(function(point) { return point[1]; });
+    var x = Math.min.apply(Math, xPoints);
+    var y = Math.min.apply(Math, yPoints);
+    var width = Math.max.apply(Math, xPoints) - x;
+    var height = Math.max.apply(Math, yPoints) - y;
+
+    return {
+      points: points,
+      image: image,
+      rotation: rotation,
+      x: x,
+      y: y,
+      width: width,
+      height: height
+    };
+  };
+
+  for (var type in origamiTypes) {
+    origamiTypes[type].paths = origamiTypes[type].paths.map(enhancePaths.bind(null, origamiTypes[type]));
+  }
+};
+
+var drawImage = function(source, ctx, path) {
   scratchCtx.save();
 
   scratchCtx.clearRect(0, 0, scratchCanvas.width, scratchCanvas.height);
 
-  var pathXs = path.map(function(point) { return point[0]; });
-  var pathYs = path.map(function(point) { return point[1]; });
-  var minX = Math.min.apply(Math, pathXs);
-  var maxX = Math.max.apply(Math, pathXs);
-  var minY = Math.min.apply(Math, pathYs);
-  var maxY = Math.max.apply(Math, pathYs);
-  var width = maxX - minX;
-  var height = maxY - minY;
-
-
-  var sx = image[0] - 100;
-  var sy = image[1] - 100;
+  var sx = path.image[0] - 100;
+  var sy = path.image[1] - 100;
   var sw = 200;
   var sh = 200;
 
-  var dtx = minX + width * 0.5;
-  var dty = minY + height * 0.5;
+  var dtx = path.x + path.width * 0.5;
+  var dty = path.y + path.height * 0.5;
 
   scratchCtx.translate(dtx, dty);
 
-  if (rotation) {
-    scratchCtx.rotate(rotation * Math.PI / 180);
+  if (path.rotation) {
+    scratchCtx.rotate(path.rotation * Math.PI / 180);
   }
   if (window.debug) {
     scratchCtx.globalAlpha = 0.5;
@@ -54,10 +72,10 @@ var drawImage = function(source, ctx, path, image, rotation) {
   scratchCtx.globalCompositeOperation = 'destination-in';
   scratchCtx.beginPath();
 
-  scratchCtx.moveTo(path[0][0], path[0][1]);
+  scratchCtx.moveTo(path.points[0][0], path.points[0][1]);
 
-  for (var i = 1; i < path.length; i++) {
-    scratchCtx.lineTo(path[i][0], path[i][1]);
+  for (var i = 1; i < path.points.length; i++) {
+    scratchCtx.lineTo(path.points[i][0], path.points[i][1]);
   }
 
   scratchCtx.closePath();
@@ -77,20 +95,18 @@ var renderFrame = function(source, ctx, width, height) {
   cw = width;
   ch = height;
   var type = origamiTypes[currentType];
-  var path, rotation, image;
+  var path;
 
   if (window.debug) {
     for (var j = 0; j < type.images.length; j++) {
-      image = type.images[j];
+      var image = type.images[j];
       ctx.strokeRect(720 - image[0] - 100, image[1] - 100, 200, 200);
     }
   }
 
   for (var i = 0; i < type.paths.length; i++) {
     path = type.paths[i];
-    rotation = [90, 340, 120][i%3];
-    image = type.images[i%type.images.length];
-    drawImage(source, ctx, path, image, rotation);
+    drawImage(source, ctx, path);
   }
 
   var shadowImg = document.querySelector('[data-shadow=' + currentType + ']');
