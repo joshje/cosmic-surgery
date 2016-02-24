@@ -2,6 +2,7 @@
   overflow: hidden;
   position: relative;
   display: none;
+  text-transform: uppercase;
 
   .can-share & {
     display: block;
@@ -9,55 +10,56 @@
 
   &-title {
     font-weight: bold;
-    padding: 5px 10px;
+    padding: 10px 0;
+  }
+
+  &-capture {
+    padding: 10px;
+    text-align: center;
+
+    .btn {
+      min-width: 100%;
+      box-sizing: border-box;
+    }
+  }
+
+  &-buttons {
+    padding: 10px 20px;
   }
 
   &-wait {
+    padding: 20px;
     font-weight: bold;
     text-align: center;
-    padding: 5px;
+    background: $color-main-dark;
+    color: $color-main-light;
   }
 
-  &-options {
-  }
-
-  @media all and (min-width: 500px) {
+  @media all and (min-width: 680px) {
     &-options {
       position: absolute;
-      right: 15px;
-      top: 5px;
+      right: 20px;
+      top: 10px;
+
+      .btn {
+        min-width: 7em;
+      }
     }
   }
 
-  @media all and (min-width: 600px) {
+  @media all and (min-width: 850px) {
     &-options {
       .btn {
         min-width: 9em;
-      }
-    }
-  }
-
-  @media all and (min-width: 700px) {
-    &-options {
-      .btn {
         margin-left: 20px;
       }
     }
   }
 
-  @media all and (min-width: 800px) {
+  @media all and (min-width: 950px) {
     &-options {
       .btn {
         min-width: 11em;
-        margin-left: 20px;
-      }
-    }
-  }
-
-  @media all and (min-width: 900px) {
-    &-options {
-      .btn {
-        min-width: 15em;
       }
     }
   }
