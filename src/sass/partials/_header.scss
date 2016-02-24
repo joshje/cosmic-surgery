@@ -19,6 +19,11 @@
       background: $color-main-dark;
       color: $color-main-light;
       margin-bottom: 10px;
+
+      &:hover {
+        background: $color-main-light;
+        color: $color-main-dark;
+      }
     }
   }
 
