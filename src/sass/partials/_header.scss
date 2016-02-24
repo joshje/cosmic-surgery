@@ -1,44 +1,30 @@
 .header {
   overflow: hidden;
-  max-width: 920px;
+  max-width: 900px;
   margin: 10px auto 0;
 
   &-nav {
     text-align: center;
+    background: $color-main-dark;
+    padding: 10px;
 
     &-link {
       display: inline-block;
       text-transform: uppercase;
-      border: 7px solid $color-main-dark;
+      border: 3px solid $color-main-dark;
       background: $color-main-dark;
       color: $color-main-light;
       padding: 5px;
-      border-radius: 10px;
       text-decoration: none;
       font-weight: bold;
-      margin-bottom: 10px;
 
       &:hover {
-        background: $color-main-light;
-        color: $color-main-dark;
+        border-color: $color-main-light;
       }
-    }
 
-    @media all and (min-width: 650px) {
-      text-align: right;
-
-      &-link {
-        margin-bottom: 0;
-        border-radius: 10px 10px 0 0;
-        border-width: 10px;
-        border-bottom-width: 0;
-        padding: 10px;
-      }
-    }
-
-    @media all and (min-width: 750px) {
-      &-link {
-        padding: 10px 20px;
+      @media all and (min-width: 700px) {
+        padding: 5px 15px;
+        margin: 0 10px;
       }
     }
   }

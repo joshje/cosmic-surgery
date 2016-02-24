@@ -40,7 +40,7 @@
     width: 100%;
 
     &-inner {
-      margin: 20px;
+      margin: 10px;
       @include aspect-ratio(1, 1);
     }
 
@@ -55,11 +55,11 @@
       width: 50%;
       float: left;
 
-      &:first-child .canvas-item-inner {
-        margin-right: 10px;
+      &:nth-child(2) .canvas-item-inner {
+        margin-right: 5px;
       }
       &:last-child .canvas-item-inner {
-        margin-left: 10px;
+        margin-left: 5px;
       }
 
       &-before {

@@ -1,6 +1,6 @@
 .surgery {
   &-row {
-    padding: 15px 20px 5px;
+    padding: 15px 10px 5px;
     border-bottom: 10px solid $color-main-dark;
     overflow: hidden;
     position: relative;
@@ -33,7 +33,7 @@
     @media all and (min-width: 600px) {
       position: absolute;
       top: 5px;
-      right: 20px;
+      right: 10px;
 
       &-option {
         float: left;

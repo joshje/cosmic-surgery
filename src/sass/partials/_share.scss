@@ -14,7 +14,7 @@
   }
 
   &-capture {
-    padding: 10px 20px;
+    padding: 10px;
     text-align: center;
 
     .btn {
@@ -24,7 +24,7 @@
   }
 
   &-buttons {
-    padding: 10px 20px;
+    padding: 10px;
   }
 
   &-wait {
@@ -38,7 +38,7 @@
   @media all and (min-width: 680px) {
     &-options {
       position: absolute;
-      right: 20px;
+      right: 10px;
       top: 10px;
 
       .btn {

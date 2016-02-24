@@ -3,8 +3,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  color: $color-plain;
-  background: $color-main-light;
+  color: $color-main-dark;
+  background: $color-plain;
   letter-spacing: 2px;
   font-size: 14px;
 }
@@ -16,8 +16,6 @@ body {
 .wrap {
   max-width: 900px;
   margin: 0 auto;
-  border: 10px solid $color-main-dark;
-  background: $color-plain;
   color: $color-main-dark;
 }
 
