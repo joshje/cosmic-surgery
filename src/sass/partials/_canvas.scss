@@ -8,6 +8,34 @@
     height: 100%;
   }
 
+  .canvas-access {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: $color-main-dark;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 20px;
+
+    &-text {
+      padding: 20px;
+      position: relative;
+      &:before {
+        @include arrow(left, up);
+      }
+      &:after {
+        @include arrow(right, up);
+      }
+    }
+
+    .show-access & {
+      display: block;
+    }
+  }
+
   .canvas-item {
     width: 100%;
 

@@ -15,14 +15,20 @@
   }
 }
 
-@mixin arrow($side) {
+@mixin arrow($side, $direction: down) {
   content: '';
   width: 10px;
   height: 32px;
-  background: url('/images/arrow.png');
+  @if $direction == 'down' {
+    background: url('/images/arrow-down.png');
+    bottom: -32px;
+  }
+  @if $direction == 'up' {
+    background: url('/images/arrow-up.png');
+    top: 15px;
+  }
   background-size: 10px;
   position: absolute;
-  bottom: -32px;
 
   @if $side == 'left' {
     left: -4px;

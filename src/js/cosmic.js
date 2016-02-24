@@ -33,6 +33,7 @@ var init = function() {
   gator(document).on('click', '.select-usermedia', function() {
     if (! mediaDevices.getUserMedia) return;
     stateManager.addState('loading');
+    stateManager.addState('show-access');
     stateManager.showSurgery();
     stateManager.removeState('can-share');
     renderer.init();
@@ -45,10 +46,14 @@ var init = function() {
         }
       }
     }, function success(stream) {
+      stateManager.removeState('show-access');
       video.src = window.URL.createObjectURL(stream);
     }, function error(err) {
+      stateManager.removeState('show-access');
       stateManager.removeState('loading');
       stateManager.removeState('supports-usermedia');
+      stateManager.showStart();
+
       console.log(err);
     });
 
