@@ -40,7 +40,7 @@
     width: 100%;
 
     &-inner {
-      margin: 10px;
+      margin: 10px 0;
       @include aspect-ratio(1, 1);
     }
 

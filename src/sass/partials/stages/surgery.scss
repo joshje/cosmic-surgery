@@ -1,9 +1,13 @@
 .surgery {
   &-row {
     padding: 15px 10px 5px;
-    border-bottom: 10px solid $color-main-dark;
     overflow: hidden;
     position: relative;
+
+    &-invert {
+      background: $color-main-dark;
+      color: $color-main-light;
+    }
 
     &-title {
       text-transform: uppercase;
@@ -40,10 +44,5 @@
         margin-left: 20px;
       }
     }
-  }
-
-
-  &-share {
-    border-top: 10px solid $color-main-dark;
   }
 }
