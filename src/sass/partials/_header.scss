@@ -1,0 +1,53 @@
+.header {
+  overflow: hidden;
+  max-width: 920px;
+  margin: 10px auto 20px;
+
+  &-logo {
+    padding-bottom: 10px;
+
+    img {
+      width: 300px;
+    }
+  }
+
+  &-nav {
+    text-transform: uppercase;
+
+    .btn {
+      border-color: $color-main-dark;
+      background: $color-main-dark;
+      color: $color-main-light;
+      margin-bottom: 10px;
+    }
+  }
+
+  @media all and (min-width: 800px) {
+    &-logo {
+      width: 25%;
+      float: left;
+      padding: 10px 0;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    &-nav {
+      width: 75%;
+      text-align: right;
+      float: left;
+    }
+  }
+
+  @media all and (min-width: 900px) {
+    &-logo {
+      width: 30%;
+      padding: 8px 0;
+    }
+
+    &-nav {
+      width: 70%;
+    }
+  }
+}
