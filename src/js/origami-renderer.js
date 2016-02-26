@@ -66,7 +66,8 @@ var drawImage = function(source, ctx, path) {
 
   scratchCtx.drawImage(source.el, (source.width - cw) / 2 + sx, (source.height - ch) / 2 + sy, sw, sh, sw * -0.5, sh * -0.5, sw, sh);
 
-  scratchCtx.globalAlpha = config.query.lighten || 0.1;
+  scratchCtx.globalCompositeOperation = 'overlay';
+  scratchCtx.globalAlpha = config.query.brightness || 0.1;
   scratchCtx.fillStyle = '#fff';
   scratchCtx.fillRect(sw * -0.5, sh * -0.5, sw, sh);
   scratchCtx.restore();
