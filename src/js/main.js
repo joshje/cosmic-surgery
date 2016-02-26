@@ -2,10 +2,6 @@ var cosmic = require('./cosmic');
 var stateManager = require('./state-manager');
 var sharing = require('./sharing');
 
-if (window.location.search.indexOf('debug') !== -1) {
-  window.debug = true;
-}
-
 if ('FormData' in window) {
   cosmic.init();
   sharing.init();

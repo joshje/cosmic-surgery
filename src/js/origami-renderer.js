@@ -1,3 +1,4 @@
+var config = require('./config');
 var origamiTypes = require('./oragami-types');
 
 var cw, ch;
@@ -59,12 +60,15 @@ var drawImage = function(source, ctx, path) {
   if (path.rotation) {
     scratchCtx.rotate(path.rotation * Math.PI / 180);
   }
-  if (window.debug) {
+  if (config.query.debug) {
     scratchCtx.globalAlpha = 0.5;
   }
 
   scratchCtx.drawImage(source.el, (source.width - cw) / 2 + sx, (source.height - ch) / 2 + sy, sw, sh, sw * -0.5, sh * -0.5, sw, sh);
 
+  scratchCtx.globalAlpha = config.query.lighten || 0.1;
+  scratchCtx.fillStyle = '#fff';
+  scratchCtx.fillRect(sw * -0.5, sh * -0.5, sw, sh);
   scratchCtx.restore();
   scratchCtx.save();
 
@@ -80,7 +84,7 @@ var drawImage = function(source, ctx, path) {
 
   scratchCtx.closePath();
 
-  if (window.debug) {
+  if (config.query.debug) {
     scratchCtx.stroke();
   } else {
     scratchCtx.fill();
@@ -97,7 +101,7 @@ var renderFrame = function(source, ctx, width, height) {
   var type = origamiTypes[currentType];
   var path;
 
-  if (window.debug) {
+  if (config.query.debug) {
     for (var j = 0; j < type.images.length; j++) {
       var image = type.images[j];
       ctx.strokeRect(720 - image[0] - 100, image[1] - 100, 200, 200);
