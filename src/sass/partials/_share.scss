@@ -1,12 +1,7 @@
 .share {
   overflow: hidden;
   position: relative;
-  display: none;
   text-transform: uppercase;
-
-  .can-share & {
-    display: block;
-  }
 
   &-title {
     font-weight: bold;

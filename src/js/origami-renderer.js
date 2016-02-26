@@ -5,10 +5,13 @@ var cw, ch;
 
 var currentType = 'icosahedron';
 
-var scratchCanvas = document.createElement('canvas');
+var scratchCanvas;
 var scratchCtx;
 
 var init = function() {
+  if (scratchCanvas) return;
+
+  scratchCanvas = document.createElement('canvas');
   scratchCanvas.width = 720;
   scratchCanvas.height = 720;
   scratchCtx = scratchCanvas.getContext('2d');

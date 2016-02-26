@@ -15,6 +15,7 @@ var frameTimer;
 var init = function() {
   canvasBefore = document.querySelector('.canvas-before');
   canvasAfter = document.querySelector('.canvas-after');
+  origamiRenderer.init();
 };
 
 var getContext = function(canvas) {
@@ -37,6 +38,10 @@ var drawImage = function(ctx) {
 };
 
 var renderFrame = function() {
+  if (source.type == 'image') {
+    stateManager.hideShare();
+  } else {
+  }
   drawImage(ctxBefore);
 
   if (source.type == 'video') {
@@ -56,6 +61,13 @@ var renderFrame = function() {
 
   if (source.type == 'video') {
     frameTimer = setTimeout(renderFrame, 5);
+  } else {
+    getImageUrl(function(data) {
+      stateManager.showShare('share', {
+        downloadUrl: data.url,
+        shareId: data.id
+      });
+    });
   }
 };
 
@@ -75,7 +87,6 @@ var renderFromVideo = function(el) {
   source.type = 'video';
   source.width = el.videoWidth;
   source.height = el.videoHeight;
-  origamiRenderer.init(source);
 
   render();
 };
@@ -85,7 +96,6 @@ var renderFromImage = function(el) {
   source.type = 'image';
   source.width = 720;
   source.height = 720;
-  origamiRenderer.init(source);
 
   render();
 };

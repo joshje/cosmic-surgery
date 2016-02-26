@@ -20,4 +20,8 @@ router.get('/', function(req, res) {
 
 });
 
+router.get('/share/:shareId', function(req, res) {
+  res.redirect('/?share=' + req.params.shareId);
+});
+
 module.exports = router;

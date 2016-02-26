@@ -13,14 +13,13 @@ var init = function() {
 
   gator(video).on('play', function() {
     stateManager.removeState('loading');
-    stateManager.addState('can-share');
+    stateManager.showShare('capture');
     renderer.renderFromVideo(video);
   });
 
   img.crossOrigin = 'Anonymous';
   gator(img).on('load', function() {
     stateManager.removeState('loading');
-    stateManager.addState('can-share');
     renderer.renderFromImage(img);
   });
 
@@ -35,8 +34,8 @@ var init = function() {
     stateManager.addState('loading');
     stateManager.addState('show-access');
     stateManager.showSurgery();
-    stateManager.removeState('can-share');
     renderer.init();
+    stateManager.hideShare();
 
     mediaDevices.getUserMedia({
       video: {

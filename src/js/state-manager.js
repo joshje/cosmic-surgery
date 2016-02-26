@@ -2,6 +2,12 @@ var startTmpl = require('../../views/partials/stageStart.handlebars');
 var surgeryTmpl = require('../../views/partials/stageSurgery.handlebars');
 var completeTmpl = require('../../views/partials/stageComplete.handlebars');
 
+var shareTmpls = {
+  capture: require('../../views/partials/share/capture.handlebars'),
+  wait: require('../../views/partials/share/wait.handlebars'),
+  share: require('../../views/partials/share/share.handlebars')
+};
+
 var procedures = [
   {
     name: 'icosahedron',
@@ -39,6 +45,15 @@ module.exports = {
       count: countStr(),
       procedures: procedures
     });
+  },
+  showShare: function(view, opts) {
+    view = view || 'capture';
+    var shareEl = document.querySelector('.share');
+    shareEl.innerHTML = shareTmpls[view](opts);
+  },
+  hideShare: function() {
+    var shareEl = document.querySelector('.share');
+    shareEl.innerHTML = '';
   },
   showComplete: function() {
     stageEl.innerHTML = completeTmpl();

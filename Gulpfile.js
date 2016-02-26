@@ -17,6 +17,7 @@ gulp.task('js', function() {
     errorHandler: notify.onError("Error: <%= error.message %>")
   }))
   .pipe(webpack({
+    devtool: 'source-map',
     output: {
       filename: 'main.js'
     },

@@ -2,30 +2,20 @@ var gator = require('gator');
 var stateManager = require('./state-manager');
 var renderer = require('./renderer');
 
-var captureTmpl = require('../../views/partials/share/capture.handlebars');
-var waitTmpl = require('../../views/partials/share/wait.handlebars');
-var shareTmpl = require('../../views/partials/share/share.handlebars');
-
-var shareUrl;
-
-var render = function(tmpl, opts) {
-  document.querySelector('.share').innerHTML = tmpl(opts);
-};
-
 var shareLocations = {
   facebook: 'https://www.facebook.com/dialog/share?app_id=1659003591054240&display=popup&href={{url}}&redirect_uri={{url}}&description={{text}}',
   twitter: 'http://www.twitter.com/share?text={{text}}&url={{url}}&hashtags=cosmicsurgery'
 };
 
 var capture = function() {
-  render(waitTmpl);
+  stateManager.showShare('wait');
 
   renderer.getImageUrl(function(data) {
-    shareUrl = 'https://cosmic-surgery.herokuapp.com?share=' + data.id;
-
-    render(shareTmpl, {
-      downloadUrl: data.url
+    stateManager.showShare('share', {
+      downloadUrl: data.url,
+      shareId: data.id
     });
+
   });
 
   return false;
@@ -33,6 +23,8 @@ var capture = function() {
 
 var share = function() {
   var type = this.getAttribute('data-share');
+  var id = this.getAttribute('data-share-id');
+  var shareUrl = 'https://cosmicsurgery.co.uk/share/' + id;
 
   var shareLocation = shareLocations[type]
   .replace(/{{url}}/g, encodeURIComponent(shareUrl))
@@ -52,8 +44,7 @@ var share = function() {
 };
 
 var retry = function() {
-  render(captureTmpl);
-  renderer.render();
+  stateManager.showStart();
 
   return false;
 };
