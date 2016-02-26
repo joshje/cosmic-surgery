@@ -1,22 +1,5 @@
 .btn {
-  display: inline-block;
-  font-size: 14px;
-  color: $color-main-dark;
-  background: $color-main-light;
-  padding: 7px;
-  cursor: pointer;
-  text-decoration: none;
-  font-weight: bold;
-  border: 3px solid $color-main-light;
-  text-align: center;
-
-  &:hover {
-    border-color: $color-main-dark;
-  }
-
-  &.active {
-    border-color: $color-main-dark;
-  }
+  @include button($color-main-dark, $color-main-light, $color-main-dark);
 }
 
 .file-select {

@@ -9,18 +9,9 @@
     padding: 10px;
 
     &-link {
+      @include button($color-main-light, $color-main-dark, $color-main-light);
       display: inline-block;
       text-transform: uppercase;
-      border: 3px solid $color-main-dark;
-      background: $color-main-dark;
-      color: $color-main-light;
-      padding: 5px;
-      text-decoration: none;
-      font-weight: bold;
-
-      &:hover {
-        border-color: $color-main-light;
-      }
 
       @media all and (min-width: 700px) {
         padding: 5px 15px;

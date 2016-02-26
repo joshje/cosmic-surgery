@@ -38,3 +38,21 @@
     right: -4px;
   }
 }
+
+@mixin button($color, $background-color, $hover-color) {
+  display: inline-block;
+  font-size: 14px;
+  color: $color;
+  background: $background-color;
+  padding: 7px;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: bold;
+  border: 3px solid $background-color;
+  text-align: center;
+
+  &:hover,
+  &.active {
+    border-color: $hover-color;
+  }
+}

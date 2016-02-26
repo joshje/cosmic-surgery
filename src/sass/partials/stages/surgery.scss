@@ -21,6 +21,7 @@
     overflow: hidden;
 
     &-option {
+      @include button($color-main-dark, $color-main-light, $color-plain);
       display: block;
       position: relative;
       padding-right: 50px;
