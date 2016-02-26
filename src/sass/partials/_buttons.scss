@@ -9,11 +9,9 @@
 }
 
 .select-usermedia {
-  opacity: 0.5;
-  cursor: default;
+  display: none;
 
   .supports-usermedia & {
-    opacity: 1;
-    cursor: pointer;
+    display: inline-block;
   }
 }
