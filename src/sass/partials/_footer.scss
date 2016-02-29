@@ -1,0 +1,21 @@
+.footer {
+  font-size: 10px;
+  text-align: right;
+  max-width: 900px;
+  margin: 10px auto 0;
+  letter-spacing: 0.1em;
+
+  &-inner {
+    padding: 10px;
+  }
+
+  &-link {
+    color: $color-main-dark;
+    text-decoration: none;
+    font-weight: bold;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

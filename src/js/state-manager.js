@@ -1,6 +1,6 @@
-var startTmpl = require('../../views/partials/stageStart.handlebars');
-var surgeryTmpl = require('../../views/partials/stageSurgery.handlebars');
-var completeTmpl = require('../../views/partials/stageComplete.handlebars');
+var startTmpl = require('../../views/partials/stages/start.handlebars');
+var surgeryTmpl = require('../../views/partials/stages/surgery.handlebars');
+var completeTmpl = require('../../views/partials/stages/complete.handlebars');
 
 var shareTmpls = {
   capture: require('../../views/partials/share/capture.handlebars'),
