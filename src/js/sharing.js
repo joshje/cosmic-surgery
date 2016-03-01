@@ -4,7 +4,7 @@ var renderer = require('./renderer');
 
 var shareLocations = {
   facebook: 'https://www.facebook.com/dialog/share?app_id=1659003591054240&display=popup&href={{url}}&redirect_uri={{url}}&description={{text}}',
-  twitter: 'http://www.twitter.com/share?text={{text}}&url={{url}}&hashtags=cosmicsurgeryfacelift'
+  twitter: 'http://www.twitter.com/share?text={{text}}&url={{url}}&hashtags=cosmicfacelift'
 };
 
 var capture = function() {
