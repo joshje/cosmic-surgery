@@ -30,6 +30,7 @@ var init = function() {
   }
 
   gator(document).on('click', '.select-usermedia', function() {
+    window.ga('send', 'event', 'begin', 'video');
     if (! mediaDevices.getUserMedia) return;
     stateManager.addState('loading');
     stateManager.addState('show-access');
@@ -60,6 +61,7 @@ var init = function() {
   });
 
   gator(document).on('change', '.select-image', function(evt) {
+    window.ga('send', 'event', 'begin', 'image');
     stateManager.addState('loading');
     stateManager.showSurgery();
     renderer.init();

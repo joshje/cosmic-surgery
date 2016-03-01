@@ -76,6 +76,7 @@ var render = function() {
 
   if (! source.el) return;
 
+  window.ga('send', 'pageview', '/render/' + source.type);
   ctxBefore = getContext(canvasBefore);
   ctxAfter = getContext(canvasAfter);
 

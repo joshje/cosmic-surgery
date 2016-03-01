@@ -8,6 +8,7 @@ var shareLocations = {
 };
 
 var capture = function() {
+  window.ga('send', 'event', 'capture', 'capture');
   stateManager.showShare('wait');
 
   renderer.getImageUrl(function(data) {
@@ -25,6 +26,7 @@ var share = function() {
   var type = this.getAttribute('data-share');
   var id = this.getAttribute('data-share-id');
   var shareUrl = 'https://cosmicsurgery.co.uk/share/' + id;
+  window.ga('send', 'event', 'share', type);
 
   var shareLocation = shareLocations[type]
   .replace(/{{url}}/g, encodeURIComponent(shareUrl))
@@ -44,6 +46,8 @@ var share = function() {
 };
 
 var retry = function() {
+  window.ga('send', 'event', 'retry', 'retry');
+  window.ga('send', 'pageview', '/');
   stateManager.showStart();
 
   return false;
