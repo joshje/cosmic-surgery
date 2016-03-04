@@ -3,6 +3,6 @@ module.exports = {
     return req.postgres.one('SELECT count FROM surgeryCounter WHERE id=1');
   },
   increment: function(req) {
-    return req.postgres.query('UPDATE surgeryCounter SET count = count + 1 WHERE id=1');
+    return req.postgres.query('INSERT INTO surgeryCounter (id, count) VALUES (1, 1) ON DUPLICATE KEY UPDATE count = count + 1');
   }
 };
