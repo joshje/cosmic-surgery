@@ -4,7 +4,9 @@ var gallery = require('./helpers/gallery');
 router.get('/', function(req, res) {
   gallery.get(req)
   .then(function(results) {
-    res.json(results);
+    res.render('gallery', {
+      gallery: results
+    });
   });
 });
 

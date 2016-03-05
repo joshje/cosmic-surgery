@@ -25,7 +25,8 @@ router.post('/', function(req, res) {
       Bucket: 'cosmicsurgery',
       Key: key,
       Body: stream,
-      ACL: 'public-read'
+      ACL: 'public-read',
+      ContentType: 'image/jpeg'
     }, function (err) {
       if (err) {
         console.log('failed to upload', err);

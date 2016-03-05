@@ -1,0 +1,20 @@
+.gallery {
+  overflow: hidden;
+  margin: 5px -5px;
+
+  &-image {
+    width: 50%;
+    float: left;
+    padding: 5px;
+    box-sizing: border-box;
+
+    @media all and (min-width: 600px) {
+      width: 25%;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+  }
+}
