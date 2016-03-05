@@ -6,7 +6,17 @@
   letter-spacing: 0.1em;
 
   &-inner {
-    padding: 10px;
+    padding: 10px 0;
+    overflow: hidden;
+  }
+
+  &-left {
+    float: left;
+  }
+
+  &-right {
+    float: right;
+    text-align: right;
   }
 
   &-link {

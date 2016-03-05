@@ -29,6 +29,7 @@ app.use(require('./middleware/postgres'));
 app.use(express.static(__dirname + '/dist'));
 
 app.use('/', require('./routes/cosmicsurgery'));
+app.use('/terms', require('./routes/terms'));
 app.use('/counter', require('./routes/counter'));
 app.use('/gallery', require('./routes/gallery'));
 app.use('/upload', imageUpload.single('image'), require('./routes/upload-image'));
