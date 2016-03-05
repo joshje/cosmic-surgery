@@ -2,6 +2,7 @@ var router = require('express').Router();
 var AWS = require('aws-sdk');
 var uuid = require('node-uuid');
 var gm = require('gm').subClass({ imageMagick: true });
+var gallery = require('./helpers/gallery');
 var counter = require('./helpers/counter');
 
 AWS.config.update({
@@ -39,12 +40,14 @@ router.post('/', function(req, res) {
           ResponseContentDisposition: 'attachment; filename=cosmicsurgery.jpg',
         }, function (err, url) {
           if (err) {
-            console.log('failed to upload', err);
+            console.log('failed to get upload URL', err);
             res.status(500).json({
               error: true,
               message: 'failed to upload image'
             });
           } else {
+            gallery.add(req, id);
+
             res.json({
               id: id,
               url: url
@@ -56,7 +59,8 @@ router.post('/', function(req, res) {
     });
   };
 
-  gm(req.file.buffer, req.file.filename)
+
+  gm(req.file.buffer, 'image')
   .autoOrient()
   .resize(720, 720, '^')
   .gravity('Center')

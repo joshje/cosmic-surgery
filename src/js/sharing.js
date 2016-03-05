@@ -22,6 +22,12 @@ var capture = function() {
   return false;
 };
 
+var addToGallery = function(id) {
+  var http = new XMLHttpRequest();
+  http.open('POST', '/gallery/permit?id=' + id, true);
+  http.send();
+};
+
 var share = function() {
   var type = this.getAttribute('data-share');
   var id = this.getAttribute('data-share-id');
@@ -41,6 +47,8 @@ var share = function() {
   var top = (sh - h) / 2;
 
   window.open(shareLocation, 'cosmic-share', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=' + w + ',height=' + h + ',left=' + left + ',top=' + top);
+
+  addToGallery(id);
 
   return false;
 };
