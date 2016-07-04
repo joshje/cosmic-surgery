@@ -4,7 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node node_modules/gulp/bin/gulp build && node app.js"
+    "start": "node node_modules/gulp/bin/gulp build && node app.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "",
   "license": "ISC",
@@ -29,6 +31,8 @@
     "pg-promise": "^3.2.0",
     "qs": "^6.1.0",
     "s3": "^4.4.0",
-    "webpack-stream": "^3.1.0"
-  }
+    "webpack-stream": "^3.1.0",
+    "snyk": "1.16.0"
+  },
+  "snyk": true
 }
