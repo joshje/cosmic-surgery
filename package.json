@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node node_modules/gulp/bin/gulp build && node app.js",
     "snyk-protect": "snyk protect",
-    "prepublish": "npm run snyk-protect"
+    "prepublish": "npm run snyk-protect",
+    "prepare": "npm run snyk-protect"
   },
   "author": "",
   "license": "ISC",
@@ -32,7 +33,7 @@
     "qs": "^6.1.0",
     "s3": "^4.4.0",
     "webpack-stream": "^3.1.0",
-    "snyk": "^1.17.0"
+    "snyk": "^1.105.0"
   },
   "snyk": true
 }
