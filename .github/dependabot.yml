@@ -1,0 +1,23 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: pg-promise
+    versions:
+    - 10.9.2
+    - 10.9.4
+    - 10.9.5
+  - dependency-name: express-handlebars
+    versions:
+    - 5.2.0
+    - 5.2.1
+  - dependency-name: pg
+    versions:
+    - 8.5.1
+  - dependency-name: gulp-notify
+    versions:
+    - 3.2.0
