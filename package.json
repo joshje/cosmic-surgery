@@ -14,7 +14,7 @@
     "aws-sdk": "^2.2.41",
     "blueimp-canvastoblob": "^2.1.0",
     "express": "^4.13.4",
-    "express-handlebars": "^3.0.0",
+    "express-handlebars": "^5.3.1",
     "gator": "^1.2.4",
     "gm": "^1.21.1",
     "gulp": "^3.9.0",
